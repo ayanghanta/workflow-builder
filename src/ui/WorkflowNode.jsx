@@ -136,7 +136,7 @@ function WorkflowNode({ node }) {
             Delete
           </button>
         )}
-        {allChildNodes.length === 0 && !isEndNode && (
+        {allChildNodes.length === 0 && !isEndNode && !isBranchNode && (
           <AddNodeButton onCreateNode={handleCreateNode} />
         )}
       </div>
