@@ -9,11 +9,7 @@ import {
 import { useNodeContext } from "../context/NodesContext";
 import { useCalculateConnectorPosition } from "../hooks/useCalculateConnectorPosition";
 import { useClickOutside } from "../hooks/useClickOutside";
-import {
-  createNodeId,
-  getColorForNode,
-  getConditionPathId,
-} from "../utils/helper";
+import { createUniId, getColorForNode } from "../utils/helper";
 import AddNodeButton from "./AddNodeButton";
 import ConditionBox from "./ConditionBox";
 import Connector from "./Connector";
@@ -35,9 +31,7 @@ function WorkflowNode({ node }) {
   const { canvasHeight, position: connectorPosition } =
     useCalculateConnectorPosition({
       targetNodeId: nodeId,
-      sourceNodeId: nodeCondition
-        ? getConditionPathId(parentId, nodeCondition)
-        : parentId,
+      sourceNodeId: nodeCondition?.id ? nodeCondition.id : parentId,
     });
 
   const allChildNodes = nodes.filter((node) => node.parentId === nodeId);
@@ -51,7 +45,7 @@ function WorkflowNode({ node }) {
     )
       return;
 
-    const currentNodeId = createNodeId();
+    const currentNodeId = createUniId();
 
     const payload = {
       title: nodeTitle,
@@ -78,13 +72,19 @@ function WorkflowNode({ node }) {
       .filter((node) => node.parentId === nodeId)
       .map((node) => node.id);
 
+    // return console.log(childNodeIds);
     // if there us any child node of that node then reconnect the nodes
     clearElementRefs();
-    if (childNodeIds.length !== 0)
+    if (childNodeIds.length > 0) {
       dispatch({
         type: "reConnectNodes",
-        payload: { ids: childNodeIds, newParentId: parentId },
+        payload: {
+          ids: childNodeIds,
+          newParentId: parentId,
+          nodeCondition,
+        },
       });
+    }
 
     // delete the noda
     dispatch({ type: "deleteNode", payload: nodeId });

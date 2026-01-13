@@ -28,7 +28,7 @@ function ConditionBox({ branchNode }) {
         <div className={styles.paths}>
           {conditions.map((condition) => (
             <PathTag
-              key={`${condition}-${id}`}
+              key={condition.id}
               parentNodeId={id}
               condition={condition}
               childNodes={allChildNodes.filter(

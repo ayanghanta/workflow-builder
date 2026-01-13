@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useRef } from "react";
 import { INITIAL_NODE_ID, NODE_TYPE_ACTION } from "../utils/contants";
-import { createConditionBox, createWorkflowNode } from "../utils/helper";
+import { createWorkflowNode } from "../utils/helper";
 
 const NodeContext = createContext();
 
@@ -10,6 +10,7 @@ const initialState = {
       title: "Master Node",
       type: NODE_TYPE_ACTION,
       id: INITIAL_NODE_ID,
+      parentId: null,
     }),
   ],
 };
@@ -21,15 +22,6 @@ function reducer(state, action) {
         ...state,
         nodes: [...state.nodes, createWorkflowNode(action.payload)],
       };
-    case "createConditionBox":
-      return {
-        ...state,
-        conditionBoxes: [
-          ...state.conditionBoxes,
-          createConditionBox(action.payload),
-        ],
-      };
-
     case "updateNodeTitle":
       return {
         ...state,
@@ -49,7 +41,11 @@ function reducer(state, action) {
         ...state,
         nodes: state.nodes.map((node) => {
           return action.payload.ids.includes(node.id)
-            ? { ...node, parentId: action.payload.newParentId }
+            ? {
+                ...node,
+                parentId: action.payload.newParentId,
+                nodeCondition: action.payload.nodeCondition,
+              }
             : node;
         }),
       };

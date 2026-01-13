@@ -7,20 +7,22 @@ import {
   NODE_TYPE_END,
 } from "../utils/contants";
 import styles from "./CreateNodePopup.module.css";
+import { createUniId } from "../utils/helper";
 
 function CreateNodePopup({ onClose, onCreateNode }) {
   const [nodeTitle, setNodeTitle] = useState(DEFAULT_NODE_TITLE);
   const [nodeType, setNodeType] = useState(NODE_TYPE_ACTION);
   const [conditions, setConditions] = useState([
-    { id: "1", value: "true" },
-    { id: 2, value: "false" },
+    { id: createUniId(), value: "true" },
+    { id: createUniId(), value: "false" },
   ]);
 
   const { refEl } = useClickOutside(onClose);
 
   function handleCreate() {
-    const conditionValues = conditions.map((item) => item.value);
-    onCreateNode({ nodeTitle, nodeType, conditions: conditionValues });
+    // const conditionValues = conditions.map((item) => item.value);
+    // onCreateNode({ nodeTitle, nodeType, conditions: conditionValues });
+    onCreateNode({ nodeTitle, nodeType, conditions });
   }
   function handleUpdateConditionValue(value, id) {
     setConditions((conditions) =>
@@ -29,10 +31,7 @@ function CreateNodePopup({ onClose, onCreateNode }) {
   }
 
   function handleAddCondition() {
-    setConditions((cons) => [
-      ...cons,
-      { id: conditions.length + 1, value: "" },
-    ]);
+    setConditions((cons) => [...cons, { id: createUniId(), value: "" }]);
   }
 
   return (

@@ -1,25 +1,22 @@
 import { useNodeContext } from "../context/NodesContext";
 import { useCalculateConnectorPosition } from "../hooks/useCalculateConnectorPosition";
 import { NODE_TYPE_BRANCH } from "../utils/contants";
-import {
-  createNodeId,
-  getConditionBoxId,
-  getConditionPathId,
-} from "../utils/helper";
+import { createUniId, getConditionBoxId } from "../utils/helper";
 import AddNodeButton from "./AddNodeButton";
 import Connector from "./Connector";
 import styles from "./PathTag.module.css";
 import WorkflowNode from "./WorkflowNode";
 
 function PathTag({ parentNodeId, condition, childNodes = [] }) {
+  const { id: conditionId, value: conditionValue } = condition;
   const { dispatch, handleAddRef } = useNodeContext();
   const { canvasHeight, position } = useCalculateConnectorPosition({
     sourceNodeId: getConditionBoxId(parentNodeId),
-    targetNodeId: getConditionPathId(parentNodeId, condition),
+    targetNodeId: conditionId,
   });
 
   function handleCreateNode({ nodeTitle, nodeType, conditions = [] }) {
-    const currentNodeId = createNodeId();
+    const currentNodeId = createUniId();
 
     const payload = {
       title: nodeTitle,
@@ -43,11 +40,9 @@ function PathTag({ parentNodeId, condition, childNodes = [] }) {
       <div className={styles.pathTagContainer}>
         <div
           className={styles.pathTag}
-          ref={(el) =>
-            handleAddRef(el, getConditionPathId(parentNodeId, condition))
-          }
+          ref={(el) => handleAddRef(el, conditionId)}
         >
-          <p className={styles.pathTagName}>{condition}</p>
+          <p className={styles.pathTagName}>{conditionValue}</p>
           {childNodes.length === 0 && (
             <AddNodeButton onCreateNode={handleCreateNode} />
           )}

@@ -30,8 +30,6 @@ export function useCalculateConnectorPosition({ targetNodeId, sourceNodeId }) {
           (nRf) => nRf.id === sourceNodeId
         )?.el;
 
-        console.log({ targetNodeRef, sourseNodeRef });
-
         if (!targetNodeRef || !sourseNodeRef) return;
 
         const sourseRect = sourseNodeRef.getBoundingClientRect();

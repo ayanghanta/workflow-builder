@@ -10,11 +10,8 @@ export function createWorkflowNode({
 }) {
   return { title, type, id, parentId, conditions, nodeCondition };
 }
-export function createConditionBox({ boxId, conditions = [], parentNodeId }) {
-  return { id: boxId, conditions, parentNodeId };
-}
 
-export function createNodeId() {
+export function createUniId() {
   const randomInt = Math.floor(Math.random() * 100) + 1;
   const randomIn2 = Math.floor(Math.random() * 200) + 1;
   const tick = `${Date.now()}`.slice(-7);
@@ -23,8 +20,6 @@ export function createNodeId() {
 }
 
 export const getConditionBoxId = (parentId) => `${parentId}-conditionBox`;
-export const getConditionPathId = (parentId, conditionvalue) =>
-  `${parentId}-${conditionvalue}-conditionPath`;
 
 export function getColorForNode(nodeType) {
   const colors = {};
