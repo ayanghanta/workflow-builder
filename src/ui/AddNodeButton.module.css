@@ -1,0 +1,11 @@
+.button {
+  position: absolute;
+  background-color: rgb(255, 249, 212);
+  padding: 4px;
+  border-radius: 50%;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  cursor: pointer;
+  z-index: 9;
+}

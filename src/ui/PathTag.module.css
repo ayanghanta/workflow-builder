@@ -1,0 +1,10 @@
+.nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.pathTag {
+  position: relative;
+  background-color: red;
+  color: #fff;
+}

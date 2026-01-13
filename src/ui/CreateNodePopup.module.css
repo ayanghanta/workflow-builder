@@ -1,0 +1,83 @@
+.overLay {
+  background: #8c8f8f83;
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.popupContainer {
+  background: #fff;
+  color: #444;
+  border-radius: 8px;
+  position: absolute;
+  min-width: 70%;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+.popup {
+  padding: 24px 26px;
+  position: relative;
+}
+.close {
+  all: unset;
+  position: absolute;
+  font-family: inherit;
+  top: 12px;
+  right: 12px;
+  font-size: 16px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+.close:hover {
+  background: #e6e6e6;
+}
+.popupTitle {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 22px;
+  font-weight: 600;
+}
+.nodeData {
+  margin-top: 12px;
+  margin-left: 6px;
+}
+.nodeData label {
+  font-size: 14px;
+}
+.nodeData input {
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 3px 6px;
+  border: 1.6px solid rgb(99, 98, 98);
+  border-radius: 4px;
+}
+.nodeData {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.nodeData .inpField {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.createNodeButton {
+  all: unset;
+  background-color: #3388e9;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 22px;
+  cursor: pointer;
+}
+.createNodeButton:hover {
+  background-color: #2c74c5;
+}

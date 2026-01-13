@@ -1,0 +1,16 @@
+.appBackground {
+  background-color: #ececec;
+  min-height: 100dvh;
+  padding: 42px;
+}
+.nodeContainer {
+  background: #85acf5;
+  width: 200px; /* important */
+  margin: 32px auto;
+}
+.nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
