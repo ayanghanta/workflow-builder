@@ -47,7 +47,7 @@ function PathTag({ parentNodeId, condition, childNodes = [] }) {
             handleAddRef(el, getConditionPathId(parentNodeId, condition))
           }
         >
-          <p>{condition}</p>
+          <p className={styles.pathTagName}>{condition}</p>
           {childNodes.length === 0 && (
             <AddNodeButton onCreateNode={handleCreateNode} />
           )}

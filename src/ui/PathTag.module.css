@@ -5,9 +5,13 @@
 }
 .pathTag {
   position: relative;
+  max-width: 200px;
   padding: 12px 36px;
   border-radius: 8px;
   background-color: #334155;
   color: #f8fafc;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.pathTagName {
+  text-align: center;
 }
