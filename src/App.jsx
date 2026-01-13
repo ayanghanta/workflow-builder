@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { useNodeContext } from "./context/nodesContext";
+import { useNodeContext } from "./context/NodesContext";
 
 import WorkflowNode from "./ui/WorkflowNode";
 import { INITIAL_NODE_ID } from "./utils/contants";

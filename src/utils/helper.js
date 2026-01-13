@@ -1,3 +1,5 @@
+import { NODE_TYPE_ACTION, NODE_TYPE_BRANCH, NODE_TYPE_END } from "./contants";
+
 export function createWorkflowNode({
   title,
   type,
@@ -18,4 +20,17 @@ export function createNodeId() {
   const tick = `${Date.now()}`.slice(-7);
 
   return `${tick}-${randomInt}-${randomIn2}`;
+}
+
+export const getConditionBoxId = (parentId) => `${parentId}-conditionBox`;
+export const getConditionPathId = (parentId, conditionvalue) =>
+  `${parentId}-${conditionvalue}-conditionPath`;
+
+export function getColorForNode(nodeType) {
+  const colors = {};
+  colors[NODE_TYPE_ACTION] = "#3b82f6";
+  colors[NODE_TYPE_BRANCH] = "#786fce";
+  colors[NODE_TYPE_END] = "#2d6f29";
+
+  return colors[nodeType];
 }

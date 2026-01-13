@@ -5,7 +5,7 @@
 }
 .nodeContainer {
   background: #85acf5;
-  width: 200px; /* important */
+  width: 200px;
   margin: 32px auto;
 }
 .nodes {

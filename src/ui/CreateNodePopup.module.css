@@ -18,6 +18,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .popup {
   padding: 24px 26px;
@@ -49,14 +50,7 @@
 .nodeData label {
   font-size: 14px;
 }
-.nodeData input {
-  border: none;
-  font-family: inherit;
-  font-size: 13px;
-  padding: 3px 6px;
-  border: 1.6px solid rgb(99, 98, 98);
-  border-radius: 4px;
-}
+
 .nodeData {
   display: flex;
   flex-direction: column;
@@ -80,4 +74,36 @@
 }
 .createNodeButton:hover {
   background-color: #2c74c5;
+}
+
+.inp {
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 3px 6px;
+  border: 1.6px solid rgb(99, 98, 98);
+  border-radius: 4px;
+}
+.conditionContainer p {
+  margin-bottom: 12px;
+  color: #222;
+  font-weight: 500;
+}
+.conditionContainer button {
+  all: unset;
+  margin-top: 16px;
+  background: rgb(238, 186, 54);
+  color: #222;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.conditionContainer button:hover {
+  background: rgb(184, 141, 34);
+}
+.constionsInps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

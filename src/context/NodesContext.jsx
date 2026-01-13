@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useRef } from "react";
 import { INITIAL_NODE_ID, NODE_TYPE_ACTION } from "../utils/contants";
-import { createConditionBox, createWorkflowNode } from "../utils/hepler";
+import { createConditionBox, createWorkflowNode } from "../utils/helper";
 
 const NodeContext = createContext();
 
@@ -12,7 +12,6 @@ const initialState = {
       id: INITIAL_NODE_ID,
     }),
   ],
-  conditionBoxes: [],
 };
 
 function reducer(state, action) {
@@ -60,22 +59,21 @@ function reducer(state, action) {
 }
 
 function NodeContextProvider({ children }) {
-  const [{ nodes, conditionBoxes }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ nodes }, dispatch] = useReducer(reducer, initialState);
 
-  const nodeRefs = useRef([]);
+  const elementRefs = useRef([]);
 
-  function handleAddRef(el, nodeId) {
-    if (!el || !nodeId) return;
-    if (nodeRefs.current.map((nodeRef) => nodeRef.el).includes(el)) return;
-    nodeRefs.current.push({ el, nodeId });
+  function handleAddRef(el, id) {
+    if (!el || !id) return;
+    if (elementRefs.current.map((elRef) => elRef.el).includes(el)) return;
+    elementRefs.current.push({ el, id });
   }
+
+  const clearElementRefs = () => (elementRefs.current = []);
 
   return (
     <NodeContext.Provider
-      value={{ nodes, handleAddRef, nodeRefs, dispatch, conditionBoxes }}
+      value={{ nodes, handleAddRef, elementRefs, dispatch, clearElementRefs }}
     >
       {children}
     </NodeContext.Provider>

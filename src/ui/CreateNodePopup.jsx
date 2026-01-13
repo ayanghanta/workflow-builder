@@ -10,14 +10,29 @@ import styles from "./CreateNodePopup.module.css";
 
 function CreateNodePopup({ onClose, onCreateNode }) {
   const [nodeTitle, setNodeTitle] = useState(DEFAULT_NODE_TITLE);
-  const [nodeType, setNodeType] = useState(NODE_TYPE_BRANCH);
-
-  const NODE_BRANCHES = ["Authenticaed", "Not Authenticated"];
+  const [nodeType, setNodeType] = useState(NODE_TYPE_ACTION);
+  const [conditions, setConditions] = useState([
+    { id: "1", value: "true" },
+    { id: 2, value: "false" },
+  ]);
 
   const { refEl } = useClickOutside(onClose);
 
   function handleCreate() {
-    onCreateNode({ nodeTitle, nodeType, conditions: NODE_BRANCHES });
+    const conditionValues = conditions.map((item) => item.value);
+    onCreateNode({ nodeTitle, nodeType, conditions: conditionValues });
+  }
+  function handleUpdateConditionValue(value, id) {
+    setConditions((conditions) =>
+      conditions.map((item) => (item.id === id ? { ...item, value } : item))
+    );
+  }
+
+  function handleAddCondition() {
+    setConditions((cons) => [
+      ...cons,
+      { id: conditions.length + 1, value: "" },
+    ]);
   }
 
   return (
@@ -37,6 +52,7 @@ function CreateNodePopup({ onClose, onCreateNode }) {
                 id="node-title"
                 value={nodeTitle}
                 onChange={(e) => setNodeTitle(e.target.value)}
+                className={styles.inp}
               />
             </div>
             <div className={styles.inpField}>
@@ -51,6 +67,24 @@ function CreateNodePopup({ onClose, onCreateNode }) {
                 <option value={NODE_TYPE_END}>End</option>
               </select>
             </div>
+            {nodeType === NODE_TYPE_BRANCH && (
+              <div className={styles.conditionContainer}>
+                <p>Branching Conditions</p>
+                <div className={styles.constionsInps}>
+                  {conditions.map(({ id, value }) => (
+                    <input
+                      key={`consdition-inp-${id}`}
+                      value={value}
+                      className={styles.inp}
+                      onChange={(e) =>
+                        handleUpdateConditionValue(e.target.value, id)
+                      }
+                    />
+                  ))}
+                </div>
+                <button onClick={handleAddCondition}>+ Add Condition</button>
+              </div>
+            )}
             <button className={styles.createNodeButton} onClick={handleCreate}>
               Create
             </button>

@@ -1,10 +1,10 @@
-function Connector({ position }) {
+function Connector({ position, canvasHeight }) {
   if (!position) return null;
   const { x1, y1, x2, y2 } = position;
   return (
     <svg
       width="100%"
-      height="100%"
+      height={canvasHeight}
       style={{
         position: "absolute",
         inset: 0,
