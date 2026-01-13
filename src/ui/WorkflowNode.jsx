@@ -68,11 +68,19 @@ function WorkflowNode({ node }) {
 
   function handleDeleteNode() {
     if (nodeId === INITIAL_NODE_ID) return;
+
     const childNodeIds = nodes
       .filter((node) => node.parentId === nodeId)
       .map((node) => node.id);
 
-    // return console.log(childNodeIds);
+    if (nodeType === NODE_TYPE_BRANCH && childNodeIds.length > 1) {
+      alert(
+        "This branch node has multiple child nodes. It cannot be deleted because its parent allows it to marge."
+      );
+
+      return;
+    }
+
     // if there us any child node of that node then reconnect the nodes
     clearElementRefs();
     if (childNodeIds.length > 0) {
