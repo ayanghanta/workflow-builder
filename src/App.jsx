@@ -5,26 +5,20 @@ import WorkflowNode from "./ui/WorkflowNode";
 import { INITIAL_NODE_ID } from "./utils/contants";
 function App() {
   const { nodes } = useNodeContext();
-  console.log(nodes);
-  function buildFlowTree(nodes, parentId) {
-    return nodes.filter((node) => node.parentId === parentId);
 
-    /*
-
-    function returnChildren(parentID)=>nodes.filter(node=>node.parentId===parenrID)
-
-    initialNode.children= 
-
-    */
+  function buildWrokflowTree(nodes, parentId) {
+    return nodes
+      .filter((node) => node.parentId === parentId)
+      .map((node) => ({
+        ...node,
+        children: buildWrokflowTree(nodes, node.id),
+      }));
   }
+
   function handleSave() {
-    const tree = nodes.map((parentNode) => {
-      return {
-        ...parentNode,
-        childrens: nodes.filter((node) => node.parentId === parentNode.id),
-      };
-    });
-    console.log(tree);
+    const workflowTree = buildWrokflowTree(nodes, null);
+
+    console.log(workflowTree);
   }
 
   const initialNode = nodes.find((node) => node.id === INITIAL_NODE_ID);
